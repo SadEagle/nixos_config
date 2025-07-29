@@ -1,0 +1,262 @@
+{
+    "createt": {
+        "prefix": "createt",
+        "body": ["create table ${1:tableName} (", "\t${2:attribute(s)}", ");"],
+        "description": "Create regular table"
+    },
+    "createti": {
+        "prefix": "createti",
+        "body": [
+            "create table if not exists ${1:tableName} (",
+            "\t${2:attribute(s)}",
+            ");"
+        ],
+        "description": "Create table with conditional"
+    },
+    "created": {
+        "prefix": "created",
+        "body": ["create database ${1:name};"],
+        "description": "Create regular table"
+    },
+    "createdi": {
+        "prefix": "createdi",
+        "body": ["create database if not exists ${1:name};"],
+        "description": "Create table with conditional"
+    },
+    "insert": {
+        "prefix": "insert",
+        "body": [
+            "insert into ${1:tableName} (",
+            "\t${2:attribute(s)}",
+            ") values ( ${3:values} )"
+        ],
+        "description": "Insert value(s)"
+    },
+    "dropt": {
+        "prefix": "dropt",
+        "body": ["drop table ${1:tableName};"],
+        "description": "Drop table"
+    },
+    "dropd": {
+        "prefix": "dropd",
+        "body": ["drop database ${1:dbName};"],
+        "description": "Drop database"
+    },
+    "dropti": {
+        "prefix": "dropti",
+        "body": ["drop table if exists ${1:tableName};"],
+        "description": "Drop table with conditional"
+    },
+    "dropdi": {
+        "prefix": "dropdi",
+        "body": ["drop database if exists ${1:dbName};"],
+        "description": "Drop database with conditional"
+    },
+    "showt": {
+        "prefix": "showt",
+        "body": ["show tables;"],
+        "description": "Show tables"
+    },
+    "showd": {
+        "prefix": "showd",
+        "body": ["show databases;"],
+        "description": "Show databases"
+    },
+    "select": {
+        "prefix": "select",
+        "body": ["select ${1:attribute(s)} from ${2:tableName};"],
+        "description": "Regular select"
+    },
+    "selectd": {
+        "prefix": "selectd",
+        "body": ["select distinct ${1:attribute(s)}", "\tfrom ${2:tableName};"],
+        "description": "Select Distinct"
+    },
+    "selectw": {
+        "prefix": "selectw",
+        "body": [
+            "select ${1:attribute(s)}",
+            "\tfrom ${2:tableName}",
+            "\twhere ${3:condition};"
+        ],
+        "description": "Select with condition"
+    },
+    "selector": {
+        "prefix": "selector",
+        "body": [
+            "select ${1:attribute(s)}",
+            "\tfrom ${2:tableName}",
+            "\torder by ${3:attribute(s)} ${4:ASC|DESC};"
+        ],
+        "description": "Select with order"
+    },
+    "updatet": {
+        "prefix": "updatet",
+        "body": [
+            "update ${1:tableName}",
+            "\tset ${2:attribute(s)}",
+            "\twhere ${3:condition};"
+        ],
+        "description": "Update table"
+    },
+    "delete": {
+        "prefix": "delete",
+        "body": ["delete from ${1:tableName}", "\twhere ${3:condition};"],
+        "description": "Delete records"
+    },
+    "altert": {
+        "prefix": "altert",
+        "body": ["alter table ${1:tableName}", "\t ${2:intructions};"],
+        "description": "Alter table"
+    },
+    "alterad": {
+        "prefix": "alterad",
+        "body": ["alter table ${1:tableName}", "\tadd column ${2:col_name};"],
+        "description": "Alter table - Add column"
+    },
+    "alteraf": {
+        "prefix": "alteraf",
+        "body": [
+            "alter table ${1:tableName}",
+            "\tadd column ${2:col_name}",
+            "\tafter ${5:col_name};"
+        ],
+        "description": "Alter table - Add column after"
+    },
+    "alterdb": {
+        "prefix": "alterdb",
+        "body": [
+            "alter database ${1:dbName}",
+            "\tcharacter set ${2:charset}",
+            "\tcollate ${3:utf8_unicode_ci};"
+        ],
+        "description": "Alter database"
+    },
+    "ijoin": {
+        "prefix": "ijoin",
+        "body": [
+            "select ${1:attribute(s)}",
+            "\tfrom ${2:tableName}",
+            "\tinner JOIN ${3:tableName2}",
+            "\ton ${4:match};"
+        ],
+        "description": "Inner Join"
+    },
+    "rjoin": {
+        "prefix": "rjoin",
+        "body": [
+            "select ${1:attribute(s)}",
+            "\tfrom ${2:tableName}",
+            "\tright JOIN ${3:tableName2}",
+            "\ton ${4:match};"
+        ],
+        "description": "Right Join"
+    },
+    "ljoin": {
+        "prefix": "ljoin",
+        "body": [
+            "select ${1:attribute(s)}",
+            "\tfrom ${2:tableName}",
+            "\tleft JOIN ${3:tableName2}",
+            "\ton ${4:match};"
+        ],
+        "description": "Left Join"
+    },
+    "fjoin": {
+        "prefix": "fjoin",
+        "body": [
+            "select ${1:attribute(s)}",
+            "\tfrom ${2:tableName}",
+            "\tfull JOIN OUTER ${3:tableName2}",
+            "\ton ${4:match}",
+            "\twhere ${5:condition};"
+        ],
+        "description": "Full Join"
+    },
+    "union": {
+        "prefix": "union",
+        "body": [
+            "select ${1:attribute(s)} from ${2:tableName}",
+            "union",
+            "select ${3:attribute(s)} from ${4:tableName2};"
+        ],
+        "description": "Regular union"
+    },
+    "uniona": {
+        "prefix": "uniona",
+        "body": [
+            "select ${1:attribute(s)} from ${2:tableName}",
+            "union all",
+            "select ${3:attribute(s)} from ${4:tableName2};"
+        ],
+        "description": "All union"
+    },
+    "groupb": {
+        "prefix": "groupb",
+        "body": [
+            "select ${1:attribute(s)}",
+            "\tfrom ${2:tableName}",
+            "\tgroup BY ${3:attribute(s)};"
+        ],
+        "description": "Group by"
+    },
+    "bakupd": {
+        "prefix": "bakupd",
+        "body": ["backup database ${1:dbName}", "\tto disk ${2:filepath};"],
+        "description": "Backup database"
+    },
+    "bakupdw": {
+        "prefix": "bakupdw",
+        "body": [
+            "backup database ${1:dbName}",
+            "\tto disk ${2:filepath}",
+            "\twith ${3:DIFERENTIAL};"
+        ],
+        "description": "Differential backup database"
+    },
+    "primaryk": {
+        "prefix": "primaryk",
+        "body": ["primary key(${1:attribute})"],
+        "description": "Primary Key"
+    },
+    "primarykc": {
+        "prefix": "primarykc",
+        "body": ["constraint ${1:attribute} primary key(${2:attribute(s)})"],
+        "description": "Constraint Primary Key"
+    },
+    "foreignk": {
+        "prefix": "foreignk",
+        "body": [
+            "foreign key(${1:attribute}) references ${2:tableName}(${3:attribute})"
+        ],
+        "description": "Foreign Key"
+    },
+    "foreignkc": {
+        "prefix": "foreignkc",
+        "body": [
+            "constraint ${1:attribute} foreign key (${2:attribute(s)})",
+            "\treferences ${3:tableName}(${4:attribute})"
+        ],
+        "description": "Constraint foreign Key"
+    },
+    "check": {
+        "prefix": "check",
+        "body": ["check ( ${1:condition} )"],
+        "description": "Check"
+    },
+    "creteuser": {
+        "prefix": "createuser",
+        "body": "create user '${1:username}'@'${2:localhost}' identified by '${3:password}';",
+        "description": "Create User"
+    },
+    "deleteuser": {
+        "prefix": "deleteuser",
+        "body": "delete from mysql.user where user = '${1:userName}';",
+        "description": "Delete user"
+    },
+    "grantuser": {
+        "prefix": "grantuser",
+        "body": "grant all privileges on ${1:db}.${2:tb} to '${3:user_name}'@'${4:localhost}';",
+        "description": "Grant privileges"
+    }
+}

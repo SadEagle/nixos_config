@@ -1,0 +1,12 @@
+{
+    "if __name__ == __main__": {
+        "prefix": "ifname",
+        "body": ["if __name__ == \"__main__\":", "\t${1:main()}"],
+        "description": "Execute code if the file is executed directly"
+    },
+    "from ... import ...": {
+        "prefix": "fromim",
+        "body": "from ${1:pathlib} import ${2:Path}",
+        "description": "Import individual objects directly into the caller’s symbol table"
+    }
+}

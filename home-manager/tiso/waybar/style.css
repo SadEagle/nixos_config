@@ -1,0 +1,98 @@
+@define-color base rgba(30,30,46,0.8);
+@define-color text #cdd6f4;
+/* Workspace */
+@define-color default #2d1854;
+@define-color hover #262d79;
+@define-color active #6a4c93;
+@define-color warning #b3541e;
+@define-color critical #70193d;
+/*Modules*/
+@define-color battery #8b4a5d;
+@define-color network #6e1559;
+@define-color sound #334a09;
+@define-color language #3e1a61;
+@define-color date #0b2742;
+@define-color time #0f4445;
+
+#workspaces button,
+#battery,
+#clock,
+#network,
+#language,
+#wireplumber
+{
+    margin: 0 0.2rem;
+    padding: 0.25rem 0.5rem;
+    /* padding-right: 0.5rem; */
+    /* padding-left: 0.5rem; */
+    animation: none;
+    border-radius: 0.5rem;
+}
+
+/*Waybar stuff*/
+#workspaces button,
+window#waybar{
+    font: 0.8rem "Cascadia Code NF", monospace;
+    color: @text;
+    background-color: @base;
+}
+
+tooltip{
+    border-radius: 0.6rem;
+}
+
+/* Workspaces stuff */
+/* https://github.com/Alexays/Waybar/wiki/Module:-Hyprland */
+#workspaces button {
+    min-width: 1.5rem;
+	background-color: @default;
+}
+#workspaces button:hover {
+    border: none;
+    box-shadow: none;
+    transition: none;
+    font-weight: normal;
+    background: @hover;
+}
+#workspaces button.active {
+	background-color: @active;
+}
+#workspaces button.urgent {
+	background-color: @warning;
+}
+
+/* Style when cursor is on the button */
+#network{
+    background-color: @network;
+}
+#wireplumber{
+    background-color: @sound;
+}
+#battery{
+    background-color: @battery;
+}
+#battery.warning{
+	background-color: @warning;
+}
+#battery.critical{
+	background-color: @critical;
+}
+/* Battery blink animation */
+@keyframes blink_critical {
+    to {
+        background-color: lightcoral;
+    }
+}
+#battery.critical:not(.charging){
+    animation: blink_critical 2s linear infinite both;
+}
+
+#language{
+    background-color: @language;
+}
+#clock.date{
+    background-color: @date;
+}
+#clock.time{
+    background-color: @time;
+}
