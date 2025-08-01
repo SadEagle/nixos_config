@@ -1,5 +1,4 @@
 {
-  config,
   lib,
   pkgs,
   ...
@@ -98,7 +97,8 @@
     neovim
 
     fuzzel
-    btop-cuda
+    # btop-cuda
+    btop-rocm
 
     valkey
     sqlite
@@ -123,14 +123,6 @@
   programs.firefox.enable = true;
   programs.hyprland.enable = true;
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
   # Services
   # Enable touchpad support
   services.libinput.enable = true;
@@ -139,51 +131,41 @@
     pulse.enable = true;
   };
 
-  # services.nginx = {
-  #   enable = true;
-  #   virtualHosts.localhost = {
-  #     locations = {
-  #       "/api" = {
-  #         proxyPass = "http://localhost:8000";
-  #       };
-  #       "/" = {
-  #         root = "${/tmp/web_chat_server/frontend}";
-  #         tryFiles = "$uri.html =404";
-  #       };
-  #       "~ \.(css|js|png)$" = {
-  #         root = "${/tmp/web_chat_server/frontend}";
-  #         tryFiles = "$uri =404";
-  #       };
-  #     };
-  #   };
-  # };
   services.postgresql = {
     enable = true;
     package = pkgs.postgresql_17;
     ensureDatabases = [ "mainDB" ];
   };
 
-  # services.forgejo = {
-  #   enable = true;
-  #   database.type = "sqlite3";
-  #   lfs.enable = true;
-  #   settings.server = {
-  #     ROOT_URL = "http://localhost:3000/";
+  # TODO: redo forgejo, add secret to actions
+  services.forgejo = {
+    enable = true;
+    database.type = "sqlite3";
+    lfs.enable = true;
+    settings = {
+      server = {
+        ROOT_URL = "https://localhost:3000";
+      };
+      acations = {
+        ENABLED = true;
+        DEFAULT_ACTIONS_URL = "github";
+      };
+      mailer.ENABLED = false;
+    };
+  };
+  # # Forgejo actions
+  # services.gitea-actions-runner = {
+  #   package = pkgs.forgejo-actions-runner;
+  #   instances.default = {
+  #     enable = true;
+  #     name = "super-nix";
+  #     url = "http://localhost:3000/";
+  #     token = "6S7uMoel403CIwiJSIjaVh1K12wEMKhNKYh36LG1";
+  #     labels = [
+  #       "nix-mix:docker://nixos/nix:latest"
+  #     ];
   #   };
   # };
-  # Forgejo actions
-  #services.gitea-actions-runner = {
-  #  package = pkgs.forgejo-actions-runner;
-  #  instances.default = {
-  #    enable = true;
-  #    name = "super-nix";
-  #    url = "http://localhost:3000/";
-  #    token = "6S7uMoel403CIwiJSIjaVh1K12wEMKhNKYh36LG1";
-  #    labels = [
-  #      "nix-mix:docker://nixos/nix:latest"
-  #    ];
-  #  };
-  #};
 
   # Greetd.Agreety
   services.getty.helpLine = lib.mkForce "";
@@ -196,10 +178,16 @@
     };
   };
 
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
+  # # Firewall
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [
+      80
+      443
+      # V2raya default ports
+      21070
+      21071
+      21072
+    ];
+  };
 }
