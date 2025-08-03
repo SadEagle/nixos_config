@@ -36,25 +36,7 @@
   hardware.graphics.extraPackages32 = with pkgs; [
     driversi686Linux.amdvlk
   ];
-  # NVIDIA GPU support
-  #nixpkgs.config.allowUnfreePredicate =
-  #  pkg:
-  #  builtins.elem (lib.getName pkg) [
-  #    "nvidia-x11"
-  #    "nvidia-settings"
-  #    "nvidia-persistenced"
-  #  ];
-  #services.xserver.videoDrivers = [ "nvidia" ];
-  #hardware.nvidia = {
-  #  modesetting.enable = true;
-  #  powerManagement.enable = false;
-  #  powerManagement.finegrained = false;
-  #  open = false;
-  #  nvidiaSettings = true;
-  #  package = config.boot.kernelPackages.nvidiaPackages.stable;
-  #};
 
-  # Set your time zone
   time.timeZone = "Asia/Almaty";
 
   # Internalisation properties
@@ -75,10 +57,6 @@
     hashedPassword = "$y$j9T$73KY5Hojqw4fdXp.WyxgX0$GiyjjoMJ8evOhTJqFQ1W3VU3WD9QiPik7198wydTWs0";
   };
 
-  # Configure keymap in X11
-  # services.xserver.xkb.layout = "us";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
-
   environment.sessionVariables = {
     XDG_CACHE_HOME = "$HOME/.cache";
     XDG_CONFIG_HOME = "$HOME/.config";
@@ -97,23 +75,21 @@
     neovim
 
     fuzzel
-    # btop-cuda
     btop-rocm
 
     valkey
     sqlite
 
-    # TODO: switch to arion
-    docker-compose
+    arion
   ];
 
   # Docker
   virtualisation.docker = {
     enable = true;
-    rootless = {
-      enable = true;
-      setSocketVariable = true;
-    };
+    # rootless = {
+    #   enable = true;
+    #   setSocketVariable = true;
+    # };
   };
 
   # Programs
