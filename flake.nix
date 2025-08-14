@@ -10,7 +10,7 @@
   };
 
   outputs =
-    { nixpkgs, home-manager, ... }:
+    { nixpkgs, home-manager, ... }@inputs:
     {
       nixosConfigurations.atlantis = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";

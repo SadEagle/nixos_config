@@ -18,15 +18,22 @@
   #   };
   # };
 
-  # Firefox plugins needs
-  nixpkgs.config.packageOverrides = pkgs: {
-    nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/main.tar.gz") {
-      inherit pkgs;
-    };
-  };
+  # # Firefox plugins needs
+  # nixpkgs.config.packageOverrides = pkgs: {
+  #   nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/main.tar.gz") {
+  #     inherit pkgs;
+  #   };
+  # };
+
+  # config.allowUnfreePredicate =
+  #   pkg:
+  #   builtins.elem (lib.getName pkg) [
+  #     "steam"
+  #   ];
 
   home.packages = with pkgs; [
     # Libs
+    p7zip
     fzf
     fd
     ripgrep
@@ -34,19 +41,15 @@
     # Languages
     lua
     python314
-    rocmPackages.clang
     nodejs
     typescript
-
-    # Language packages
-    uv
 
     # Hyprland extentions
     hyprpaper
     hyprlock
     hypridle
     hyprshot
-    # Hyprland extra apps
+    # Extra apps
     yazi
     fastfetch
     # Non-system apps
@@ -119,6 +122,7 @@
       nixd
       nixfmt-rfc-style
       # TODO: procede how to use `ty` and here
+      rocmPackages.clang
       pyright
       ruff
       lua-language-server

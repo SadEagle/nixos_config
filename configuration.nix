@@ -52,7 +52,7 @@
     isNormalUser = true;
     extraGroups = [
       "wheel"
-      "docker"
+      "podman"
     ];
     hashedPassword = "$y$j9T$73KY5Hojqw4fdXp.WyxgX0$GiyjjoMJ8evOhTJqFQ1W3VU3WD9QiPik7198wydTWs0";
   };
@@ -80,16 +80,19 @@
     valkey
     sqlite
 
-    arion
+    # Podman compose
+    docker-compose
   ];
 
-  # Docker
-  virtualisation.docker = {
-    enable = true;
-    # rootless = {
-    #   enable = true;
-    #   setSocketVariable = true;
-    # };
+  # Podman
+  virtualisation = {
+    podman = {
+      enable = true;
+      dockerSocket.enable = true;
+      # Create docker aliases
+      dockerCompat = true;
+      defaultNetwork.settings.dns_enabled = true;
+    };
   };
 
   # Programs
@@ -97,7 +100,11 @@
   programs.git.enable = true;
   programs.fish.enable = true;
   programs.firefox.enable = true;
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    withUWSM = true;
+    xwayland.enable = true;
+  };
 
   # Services
   # Enable touchpad support
@@ -120,13 +127,12 @@
     lfs.enable = true;
     settings = {
       server = {
-        ROOT_URL = "https://localhost:3000";
+        ROOT_URL = "http://localhost:3000";
       };
-      acations = {
-        ENABLED = true;
-        DEFAULT_ACTIONS_URL = "github";
-      };
-      mailer.ENABLED = false;
+      # acations = {
+      #   ENABLED = true;
+      #   DEFAULT_ACTIONS_URL = "github";
+      # };
     };
   };
   # # Forgejo actions

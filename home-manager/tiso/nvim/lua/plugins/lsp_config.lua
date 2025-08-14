@@ -21,9 +21,9 @@ return {
     vim.lsp.enable('pyright')
     vim.lsp.enable('ruff')
     -- C/C++
-    -- lspconfig.clangd.setup { capabilities = capabilities }
+    vim.lsp.enable('clangd')
     -- CMake
-    -- lspconfig.neocmake.setup { capabilities = capabilities }
+    -- vim.lsp.enable('cmake')
     -- Docker
     vim.lsp.enable('dockerls')
     -- Docker compose

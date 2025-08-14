@@ -19,7 +19,7 @@ vim.api.nvim_create_autocmd("CmdlineLeave", {
 
 -- Fix docker compose lsp bad filetype
 vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
-  pattern = { 'docker-compose.yaml', 'docker-compose.yml', 'compose.yaml', 'compose.yml' },
+  pattern = { '{docker-compose,compose}.{yml,yaml}', '*.compose.{yaml,yml}' },
   desc = "Fix the issue where the LSP does not start with docker-compose.",
   callback = function()
     vim.opt.filetype = "yaml.docker-compose"
